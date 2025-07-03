@@ -432,7 +432,6 @@
 };
 
 &usb2phy0_otg {
-	phy-supply = <&vcc5v0_usb_host>;
 	status = "okay";
 };
 
