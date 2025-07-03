@@ -422,6 +422,18 @@
 	status = "okay";
 };
 
+&vepu {
+	status = "okay";
+};
+
+&vepu_mmu {
+	status = "okay";
+};
+
+&rga {
+	status = "okay";
+};
+
 &usb2phy0 {
 	status = "okay";
 };
