@@ -172,6 +172,7 @@
 	skip-version-detect;
 
 	reset-gpios = <&gpio GPIOH_4 GPIO_ACTIVE_LOW>;
+	max-link-speed = <1>;
 };
 
 &usb {
