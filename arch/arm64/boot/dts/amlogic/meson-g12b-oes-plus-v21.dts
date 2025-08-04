@@ -196,7 +196,15 @@
 	status = "okay";
 	interrupt-names = "msi";
 	skip-version-detect;
-	reset-gpio = <&gpio 20 GPIO_ACTIVE_LOW>; /* GPIOH_4 */
+
+	reset-gpios = <&gpio GPIOH_4 GPIO_ACTIVE_LOW>;
+};
+
+&usb {
+	status = "okay";
+	dr_mode = "host";
+	phys = <&usb2_phy0>, <&usb2_phy1>;
+	phy-names = "usb2-phy0", "usb2-phy1";
 };
 
 &internal_ephy {
@@ -232,8 +240,4 @@
 
 &sd_emmc_c {
 	/delete-property/ mmc-pwrseq;
-};
-
-&usb {
-	phy-names = "usb2-phy0", "usb2-phy1";
 };
