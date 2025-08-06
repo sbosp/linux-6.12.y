@@ -32,6 +32,18 @@
 	gpio-keys-polled {
 		compatible = "gpio-keys-polled";
 		poll-interval = <100>;
+
+		power-button {
+			label = "power";
+			linux,code = <KEY_POWER>;
+			gpios = <&gpio 60 GPIO_ACTIVE_HIGH>; /* GPIOX_28 */
+		};
+
+		reset-button {
+			label = "reset";
+			linux,code = <KEY_REFRESH>;
+			gpios = <&gpio 59 GPIO_ACTIVE_HIGH>; /* GPIOX_27 */
+		};
 	};
 
 	/delete-node/ leds;
@@ -66,6 +78,27 @@
 			default-state = "on";
 		};
 
+		sata1_led: sata1 {
+			label = "sata1_led";
+			gpios = <&gpio 58 GPIO_ACTIVE_HIGH>; /* GPIOX_26 */
+			default-state = "on";
+			retain-state-suspended;
+		};
+
+		sata2_led: sata2 {
+			label = "sata2_led";
+			gpios = <&gpio 52 GPIO_ACTIVE_HIGH>; /* GPIOX_20 */
+			default-state = "off";
+			retain-state-suspended;
+		};
+
+		sata3_led: sata3 {
+			label = "sata3_led";
+			gpios = <&gpio 53 GPIO_ACTIVE_HIGH>; /* GPIOX_21 */
+			default-state = "off";
+			retain-state-suspended;
+		};
+
 		usb2_power {
 			label = "usb2_power";
 			gpios = <&gpio 22 GPIO_ACTIVE_HIGH>;
@@ -73,6 +106,12 @@
 			retain-state-suspended;
 		};
 
+		fan_en {
+			label = "FAN_GPIO";
+			gpios = <&gpio 45 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+			retain-state-suspended;
+		};
 	};
 };
 
@@ -83,7 +122,6 @@
 	rx-internal-delay-ps = <1000>;
 	amlogic,invert-rxclk;
 };
-
 
 &external_phy {
 	reset-gpios = <&gpio 48 GPIO_ACTIVE_LOW>; /* GPIOX_16 */
@@ -131,6 +169,15 @@
 	/delete-property/ gpio;
 	/delete-property/ enable-active-high;
 	regulator-always-on;
+};
+
+&pcie {
+	status = "okay";
+	interrupt-names = "msi";
+	skip-version-detect;
+
+	reset-gpios = <&gpio GPIOH_4 GPIO_ACTIVE_LOW>;
+	max-link-speed = <1>;
 };
 
 &usb {
