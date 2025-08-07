@@ -84,16 +84,6 @@
 	amlogic,invert-rxclk;
 };
 
-
-&external_phy {
-	reset-gpios = <&gpio 48 GPIO_ACTIVE_LOW>; /* GPIOX_16 */
-	reset-assert-us = <10000>;
-	reset-deassert-us = <20000>;
-
-	interrupt-parent = <&gpio_intc>;
-	interrupts = <26 IRQ_TYPE_EDGE_FALLING>;
-};
-
 &internal_ephy {
 	status = "disabled";
 };
