@@ -36,11 +36,13 @@
 		power-button {
 			label = "power";
 			linux,code = <KEY_POWER>;
+			gpios = <&gpio 60 GPIO_ACTIVE_HIGH>; /* GPIOX_28 */
 		};
 
 		reset-button {
 			label = "reset";
 			linux,code = <KEY_REFRESH>;
+			gpios = <&gpio 59 GPIO_ACTIVE_HIGH>; /* GPIOX_27 */
 		};
 	};
 
@@ -50,42 +52,49 @@
 
 		sys_red_led {
 			label = "sys_red_led";
+			gpios = <&gpio_ao 10 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 			retain-state-suspended;
 		};
 
 		sys_green_led {
 			label = "sys_green_led";
+			gpios = <&gpio_ao 11 GPIO_ACTIVE_HIGH>;
 			default-state = "off";
 			retain-state-suspended;
 		};
 
 		net_green_led {
 			label = "net_green_led";
+			gpios = <&gpio 55 GPIO_ACTIVE_HIGH>; /* GPIOX_23 */
 			linux,default-trigger = "mdio_mux-0.0:00:link";
 			default-state = "off";
 		};
 
 		net_red_led {
 			label = "net_red_led";
+			gpios = <&gpio 57 GPIO_ACTIVE_LOW>; /* GPIOX_25 */
 			linux,default-trigger = "mdio_mux-0.0:00:link";
 			default-state = "on";
 		};
 
 		sata1_led: sata1 {
 			label = "sata1_led";
+			gpios = <&gpio 58 GPIO_ACTIVE_HIGH>; /* GPIOX_26 */
 			default-state = "on";
 			retain-state-suspended;
 		};
 
 		sata2_led: sata2 {
 			label = "sata2_led";
+			gpios = <&gpio 52 GPIO_ACTIVE_HIGH>; /* GPIOX_20 */
 			default-state = "off";
 			retain-state-suspended;
 		};
 
 		sata3_led: sata3 {
 			label = "sata3_led";
+			gpios = <&gpio 53 GPIO_ACTIVE_HIGH>; /* GPIOX_21 */
 			default-state = "off";
 			retain-state-suspended;
 		};
@@ -99,6 +108,7 @@
 
 		fan_en {
 			label = "FAN_GPIO";
+			gpios = <&gpio 45 GPIO_ACTIVE_HIGH>;
 			default-state = "on";
 			retain-state-suspended;
 		};
@@ -114,6 +124,7 @@
 };
 
 &external_phy {
+	reset-gpios = <&gpio 48 GPIO_ACTIVE_LOW>; /* GPIOX_16 */
 	reset-assert-us = <10000>;
 	reset-deassert-us = <20000>;
 
@@ -165,6 +176,7 @@
 	interrupt-names = "msi";
 	skip-version-detect;
 
+	reset-gpios = <&gpio GPIOH_4 GPIO_ACTIVE_LOW>;
 	max-link-speed = <1>;
 };
 
